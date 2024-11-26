@@ -10,12 +10,12 @@
 </head>
 <body class="not-loaded">
     <div class="logo-container">
-        <a href="https://sylvain.pro" target="_blank"><img src="logo.png" width="36px"/></a>
+        <a href="https://sylvain.pro" target="_blank"><img src="logo.png" class="item show" width="36px"/></a>
     </div>
 
     <div class="btn-container">
-        <a href="/register"><button class="btn">Register</button></a>
-        <a href="/login"><button class="btn clear">Login</button></a>
+        <a href="/register"><button class="btn item show">Register</button></a>
+        <a href="/login"><button class="btn clear item show">Login</button></a>
     </div>
 
     <div class="night"></div>
@@ -315,11 +315,15 @@
     
     <script>
         onload = () => {
-        const c = setTimeout(() => {
-            document.body.classList.remove("not-loaded");
-            clearTimeout(c);
-        }, 1000);
-    };
+            const items = Array.from(document.querySelectorAll('.item')).reverse();
+            items.forEach(item => item.classList.remove('show'));
+            setTimeout(() => {
+                document.body.classList.remove('not-loaded');
+                items.forEach((item, index) => {
+                    setTimeout(() => item.classList.add('show'), index * 600);
+                });
+            }, 500);
+        };
     </script>
 </body>
 </html>
