@@ -23,6 +23,15 @@ body {
     perspective: 1000px;
 }
 
+.item {
+    transform: translateY(-100px);
+}
+
+.show {
+    transform: translateY(0);
+    transition: 2s transform;
+}
+
 .logo-container {
     position: absolute;
     top: 25px;
