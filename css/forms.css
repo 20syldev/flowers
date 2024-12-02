@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+::placeholder {
+    color: #e5e5e5;
+}
+body {
+    background: #080710;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #ddd;
+}
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.login {
+    height: 520px;
+}
+.register {
+    height: 620px;
+}
+
+.shape-login, .shape-register {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+.shape-login:first-child, .shape-register:first-child {
+    background: linear-gradient(#1845ad, #23a2f6);
+}
+.shape-login:first-child {
+    top: -80px;
+    left: -80px;
+}
+.shape-register:first-child {
+    bottom: -80px;
+    left: -80px;
+}
+.shape-login:last-child, .shape-register:last-child {
+    background: linear-gradient(90deg, #ff512f, #f09819);
+}
+.shape-login:last-child {
+    bottom: -80px;
+    right: -30px;
+}
+.shape-register:last-child {
+    top: -80px;
+    right: -30px;
+}
+
+form {
+    height: fit-content;
+    width: 400px;
+    background: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px 70px 35px;
+}
+form * {
+    font-family: 'Poppins',sans-serif;
+    color: #fff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3 {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background: #ffffff12;
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+input:hover {
+    background: #cccccc12;
+}
+
+button {
+    margin-top: 50px;
+    width: 100%;
+    background: #fff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #eee;
+}
+footer {
+    position: absolute;
+    padding: 15px 0;
+    font-size: 13px;
+}
+.noaccount {
+    left: 38px;
+}
+.haveaccount {
+    right: 38px;
+}
