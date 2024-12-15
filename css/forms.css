@@ -12,6 +12,7 @@
 }
 body {
     background: #080710;
+    overflow: hidden;
 }
 
 a:hover {
