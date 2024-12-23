@@ -9,14 +9,23 @@
     <link rel="icon shortcut" href="images/logo.png">
 </head>
 <body class="not-loaded">
+    <!-- Top left button icon -->
     <div class="logo-container">
-        <a href="https://sylvain.pro" target="_blank"><img src="images/logo.png" class="item show" width="36px"/></a>
+        <a href="https://sylvain.pro" target="_blank"><img src="images/logo.png" class="item" width="36px"/></a>
     </div>
 
+    <!-- Top right button & Modal -->
     <div class="btn-container">
-        <a href="/app"><button class="btn item show">Get Started</button></a>
+        <button class="btn item" onclick="toggleModal()">Get Started</button>
+        <div class="modal hidden">
+            <input type="text" placeholder="Enter API URL" class="modal-input" id="input" onkeydown="redirect(event)"/>
+            <button class="send" onclick="redirect(event)">
+                <img src="images/paper-plane-solid.svg"/>
+            </button>
+        </div>
     </div>
 
+    <!-- Night mode & Flowers -->
     <div class="night"></div>
     <div class="flowers">
         <div class="flower flower--1">
@@ -311,18 +320,8 @@
             </div>
         </div>
     </div>
-    
-    <script>
-        onload = () => {
-            const items = Array.from(document.querySelectorAll('.item')).reverse();
-            items.forEach(item => item.classList.remove('show'));
-            setTimeout(() => {
-                document.body.classList.remove('not-loaded');
-                items.forEach((item, index) => {
-                    setTimeout(() => item.classList.add('show'), index * 600);
-                });
-            }, 500);
-        };
-    </script>
+
+    <!-- Load Js -->
+    <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
