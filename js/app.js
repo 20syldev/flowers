@@ -1,5 +1,5 @@
 let logs = [];
-let API = new URLSearchParams(window.location.search).get('api');
+let API = new URLSearchParams(window.location.search).get('api') || (window.location.href = '/');
 
 /* Fetch logs from API & update logs */
 async function fetchLogs() {
