@@ -41,7 +41,7 @@ function updateTimeline(newLogs) {
                 <div class="status status-${log.status}">${log.status}</div>
                 <div class="method method-${log.method.toLowerCase().replace(' ', '-')}">${log.method}</div>
                 <div class="request">${log.method} ${log.url}</div>
-                <div class="subtitle">${new Date(log.timestamp).toLocaleString()}</div>
+                <div class="subtitle">${new Date(log.timestamp).toLocaleString()} ${log.duration ? '&nbsp;-&nbsp; ' + log.duration : ''} ${log.platform ? '&nbsp;-&nbsp; ' + log.platform : ''}</div>
             </div>`;
         document.getElementById('timeline').prepend(logElement);
     });
