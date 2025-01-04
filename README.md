@@ -1,8 +1,8 @@
 <div align="center">
-  <a href="https://flowers.sylvain.pro"><img src="https://flowers.sylvain.pro/images/logo.png" alt="Logo" width="25%" height="auto"></a>
+  <a href="https://flowers.sylvain.pro"><img src="https://flowers.sylvain.pro/assets/images/logo.png" alt="Logo" width="25%" height="auto"/></a>
 
   # Flowers - LogCenter Customisable
-  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v0.6.0-ee6464?logo=flowers.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
+  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v0.7.0-ee6464?logo=flowers.sylvain.pro&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
 </div>
 
 ---
