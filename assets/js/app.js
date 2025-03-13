@@ -1,5 +1,4 @@
 let logs = [];
-let API = new URLSearchParams(window.location.search).get('api') || (window.location.href = '/');
 let fetching = true;
 
 /* Fetch logs from API & update logs */
@@ -17,8 +16,8 @@ async function fetchLogs() {
             fetching = false;
             return;
         }
-        updateTimeline(data);
-        logs = data;
+        const newLogs = data.filter(log => !logs.some(l => l.timestamp === log.timestamp && l.url === log.url));
+        if (newLogs.length) updateTimeline(logs = [...logs, ...newLogs]);
     } catch (error) {
         console.error('Internal server error:', error);
         updateTimeline([{
