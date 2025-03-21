@@ -8,6 +8,6 @@
 ---
 
 ## À propos
-Flowers est un LogCenter customisable et modulable disponible sur **[flowers.sylvain.pro](https://flowers.sylvain.pro)**.  
+Flowers est un LogCenter customisable et modulable disponible sur **[flowers.sylvain.pro](https://flowers.sylvain.pro)**.
 Vous pouvez ajouter une ou **plusieurs** APIs qui doivent renvoyer du **JSON** afin que l'interface puisse l'**interpréter** et créer les éléments.
 > *Une documentation détaillée sera disponible lors de la **v1.0.0***
