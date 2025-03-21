@@ -62,13 +62,16 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.status-200 {
+.status-2 {
     background: #27be8a;
 }
-.status-302 {
+.status-3 {
     background: #00aeff;
 }
-.status-404, .status-500, .method-not-found, .method-server-error {
+.status-4,
+.status-5,
+.method-not-found,
+.method-server-error {
     background: #f77777;
 }
 .method-get {
