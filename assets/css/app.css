@@ -70,6 +70,7 @@ body {
 }
 .status-4,
 .status-5,
+.method-delete,
 .method-not-found,
 .method-server-error {
     background: #f77777;
@@ -77,6 +78,10 @@ body {
 .method-get {
     background: #517fff;
 }
+.method-patch {
+    background: #ffb121;
+}
+.method-put,
 .method-post {
     background: #27be8a;
 }
