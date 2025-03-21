@@ -33,11 +33,12 @@ async function fetchLogs() {
 /* Update the timeline with new logs */
 function updateTimeline(newLogs) {
     newLogs.forEach(log => {
+        const statusClass = log.status < 300 ? 'status-2' : log.status < 400 ? 'status-3' : log.status < 500 ? 'status-4' : 'status-5';
         const logElement = document.createElement('div');
         logElement.className = 'timeline-item';
         logElement.innerHTML = `
             <div class="timeline-item-content">
-                <div class="status status-${log.status}">${log.status}</div>
+                <div class="status ${statusClass}">${log.status}</div>
                 <div class="method method-${log.method.toLowerCase().replace(' ', '-')}">${log.method}</div>
                 <div class="request">${log.method} ${log.url}</div>
                 <div class="subtitle">${new Date(log.timestamp).toLocaleString()} ${log.duration ? '&nbsp;-&nbsp; ' + log.duration : ''} ${log.platform ? '&nbsp;-&nbsp; ' + log.platform : ''}</div>
