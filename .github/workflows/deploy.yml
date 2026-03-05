@@ -1,4 +1,4 @@
-name: Deploy flowers.sylvain.pro
+name: Deploy flowers.sylvain.sh
 
 on:
   push:
