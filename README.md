@@ -2,7 +2,7 @@
   <a href="https://flowers.sylvain.sh"><img src="https://flowers.sylvain.sh/assets/images/logo.png" alt="Logo" width="25%" height="auto"/></a>
 
   # Flowers - LogCenter Customisable
-  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v0.9.0-ee6464?logo=flowers.sylvain.sh&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
+  [![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.0.0a-ee6464?logo=flowers.sylvain.sh&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
 </div>
 
 ---
