@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         url: "https://flowers.sylvain.sh",
         type: "website",
     },
-    icons: { icon: "/logo.png" },
+    icons: { icon: "/favicon.ico" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
