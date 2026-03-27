@@ -77,7 +77,7 @@ export default function Notifications({ logs, enabled, soundEnabled }: Notificat
             const url = log.url ?? log.path ?? log.endpoint ?? "";
             new Notification(`${t("titlePrefix")}${status}${t("errorSuffix")}`, {
                 body: `${method} ${url}`,
-                icon: "/logo.png",
+                icon: "/favicon.ico",
             });
         }
     }, [logs, enabled, soundEnabled, t]);
