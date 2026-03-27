@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://flowers.sylvain.sh"><img src="https://flowers.sylvain.sh/assets/images/logo.png" alt="Logo" width="25%" height="auto"/></a>
+  <a href="https://flowers.sylvain.sh"><img src="https://flowers.sylvain.sh/favicon.ico" alt="Logo" width="25%" height="auto"/></a>
 
 # Flowers - Real-time Data Viewer
 
