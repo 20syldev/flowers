@@ -154,7 +154,7 @@ export default function Content({ config }: { config: ViewOptions }) {
                             pinnedEntries={[]}
                             unpinnedEntries={filteredEntries}
                             pinnedHashes={new Set()}
-                            onTogglePin={() => {}}
+                            onTogglePin={undefined}
                             autoScroll={true}
                             fieldMapping={fieldMapping}
                             totalCount={entries.length}
