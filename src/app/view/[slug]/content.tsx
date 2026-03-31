@@ -157,6 +157,7 @@ export default function Content({ config }: { config: ViewOptions }) {
                             onTogglePin={() => {}}
                             autoScroll={true}
                             fieldMapping={fieldMapping}
+                            totalCount={entries.length}
                             selectedIndex={selectedIndex ?? undefined}
                             onSelect={handleSelect}
                         />

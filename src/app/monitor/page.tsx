@@ -464,6 +464,7 @@ function ViewerContent() {
                                     onTogglePin={togglePin}
                                     autoScroll={settings.autoScroll}
                                     fieldMapping={fieldMapping}
+                                    totalCount={allDisplayed.length}
                                     selectedIndex={selectedIndex ?? undefined}
                                     onSelect={handleSelect}
                                     scrollContainerRef={scrollContainerRef}
