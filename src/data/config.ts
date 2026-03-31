@@ -1,19 +1,29 @@
 import type { ViewOptions } from "@/data/views";
 
+interface SiteConfig {
+    title?: string;
+    endpoints?: { name: string; url: string }[];
+    interval?: number;
+}
+
 interface FlowersConfig {
     standalone: boolean;
     view: ViewOptions;
 }
 
+let json: SiteConfig = {};
+try {
+    const path = "../../endpoints.json";
+    json = (await import(path)).default;
+} catch {
+    // No endpoints.json — standalone mode disabled
+}
+
 export const config: FlowersConfig = {
-    standalone: false, // Set to true to use as the main app
+    standalone: Object.keys(json).length > 0,
     view: {
-        title: "Dashboard",
-        // Add multiple endpoints to get a selector in the header
-        endpoints: [
-            { name: "API Logs", url: "https://api.example.com/logs" },
-            { name: "API Version", url: "https://api.example.com/latest" },
-        ],
-        // interval: 5000
+        title: json.title ?? "Dashboard",
+        endpoints: json.endpoints ?? [],
+        interval: json.interval,
     },
 };
