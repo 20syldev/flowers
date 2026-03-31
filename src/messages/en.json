@@ -158,6 +158,10 @@
         "lastHour": "Last hour",
         "today": "Today"
     },
+    "selector": {
+        "title": "Endpoints",
+        "description": "Switch between configured endpoints"
+    },
     "diff": {
         "title": "Compare entries",
         "selected": "{count}/2 selected",

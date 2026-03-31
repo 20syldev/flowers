@@ -163,6 +163,10 @@
     "detail": {
         "fallbackTitle": "Détails"
     },
+    "selector": {
+        "title": "Endpoints",
+        "description": "Basculer entre les endpoints configurés"
+    },
     "diff": {
         "title": "Comparer les entrées",
         "selected": "{count}/2 sélectionnées",
