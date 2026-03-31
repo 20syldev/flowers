@@ -1,5 +1,3 @@
-export const version = "1.0.1";
-
 export const interval = 2000;
 
 export const options = [
