@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { FetchStatus } from "@/data/constants";
+import { detectFields } from "@/data/fields";
 
 export type DataEntry = Record<string, unknown>;
 export type { FetchStatus };
@@ -80,6 +81,15 @@ export function useDataFetcher({ api, interval = 2000 }: UseDataFetcherOptions) 
             if (!data.length) {
                 setStatus("empty");
                 return;
+            }
+
+            const tsKey = detectFields(data[0]).timestamp;
+            if (tsKey) {
+                data.sort((a, b) => {
+                    const ta = typeof a[tsKey] === "number" ? (a[tsKey] as number) : 0;
+                    const tb = typeof b[tsKey] === "number" ? (b[tsKey] as number) : 0;
+                    return tb - ta;
+                });
             }
 
             const existing = entriesRef.current;
