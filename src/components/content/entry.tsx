@@ -118,6 +118,7 @@ interface EntryItemProps {
     entry: Record<string, unknown>;
     fieldMapping: FieldMapping;
     index: number;
+    totalCount: number;
     selected?: boolean;
     pinned?: boolean;
     compareSelected?: boolean;
@@ -145,6 +146,7 @@ export default function EntryItem({
     entry,
     fieldMapping,
     index,
+    totalCount,
     selected,
     pinned,
     compareSelected,
@@ -162,7 +164,7 @@ export default function EntryItem({
 
     const hasStatus = statusVal !== undefined && typeof statusVal === "number";
     const hasMethod = methodVal !== undefined && typeof methodVal === "string";
-    const primaryText = `${t("entry")} ${index + 1}`;
+    const primaryText = `${t("entry")} ${totalCount - index}`;
     const ts = typeof timestampVal === "number" ? timestampVal : undefined;
     const expandable = hasNestedObjects(entry);
 

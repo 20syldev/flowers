@@ -68,6 +68,7 @@ interface TimelineProps {
     onTogglePin: (entry: DataEntry) => void;
     autoScroll: boolean;
     fieldMapping: FieldMapping;
+    totalCount: number;
     selectedIndex?: number;
     onSelect?: (index: number) => void;
     scrollContainerRef?: React.RefObject<HTMLDivElement | null>;
@@ -101,6 +102,7 @@ export default function Timeline({
     onTogglePin,
     autoScroll,
     fieldMapping,
+    totalCount,
     selectedIndex,
     onSelect,
     scrollContainerRef,
@@ -109,7 +111,6 @@ export default function Timeline({
     onCompareSelect,
 }: TimelineProps) {
     const t = useTranslations("timeline");
-    const totalCount = pinnedEntries.length + unpinnedEntries.length;
     const [prevCount, setPrevCount] = useState(totalCount);
     const [newCount, setNewCount] = useState(0);
     const internalRef = useRef<HTMLDivElement>(null);
@@ -176,6 +177,7 @@ export default function Timeline({
                     entry={entry}
                     fieldMapping={fieldMapping}
                     index={i}
+                    totalCount={totalCount}
                     selected={!compareMode && selectedIndex === i}
                     pinned={true}
                     onSelect={compareMode ? () => onCompareSelect?.(entry) : () => onSelect?.(i)}
@@ -255,6 +257,7 @@ export default function Timeline({
                                     entry={row.entry}
                                     fieldMapping={fieldMapping}
                                     index={row.globalIndex}
+                                    totalCount={totalCount}
                                     selected={!compareMode && selectedIndex === row.globalIndex}
                                     pinned={pinnedHashes.has(hashEntry(row.entry))}
                                     onSelect={
