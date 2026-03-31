@@ -71,3 +71,26 @@ Flowers stores all your data locally in your browser. Nothing is sent to any ser
 - **Pinned entries** — Entries you pinned per endpoint, so they stay visible at the top.
 
 You can export and import all of this data via the transfer feature.
+
+## Configuration
+
+By default, Flowers runs as a web app with a landing page. To use it in standalone mode (skip the landing page and load a view directly), create an `endpoints.json` file at the root of the project:
+
+```json
+{
+    "title": "Dashboard",
+    "endpoints": [
+        { "name": "API Logs", "url": "https://api.example.com/logs" },
+        { "name": "Changelog", "url": "https://example.com/changelog.json" }
+    ],
+    "interval": 5000
+}
+```
+
+| Field       | Type     | Default       | Description                                               |
+| ----------- | -------- | ------------- | --------------------------------------------------------- |
+| `title`     | `string` | `"Dashboard"` | Title displayed in the header                             |
+| `endpoints` | `array`  | `[]`          | List of `{ name, url }` objects for the endpoint selector |
+| `interval`  | `number` | —             | Polling interval in milliseconds                          |
+
+Copy the template above into `endpoints.json` at the root of the project and edit it to match your setup.
