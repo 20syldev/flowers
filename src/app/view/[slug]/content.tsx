@@ -14,9 +14,9 @@ import type { FieldMapping } from "@/data/fields";
 import { defaultFilters } from "@/data/presets";
 import type { Filters } from "@/data/presets";
 import { interval as defaultInterval } from "@/data/constants";
-import type { ViewConfig, ViewEndpoint } from "@/data/views";
+import type { ViewEndpoint, ViewOptions } from "@/data/views";
 
-export default function Content({ config }: { config: ViewConfig }) {
+export default function Content({ config }: { config: ViewOptions }) {
     useTheme();
 
     const [activeIndex, setActiveIndex] = useState(0);

@@ -1,7 +1,8 @@
 "use client";
 
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { config } from "@/data/config";
 import Link from "next/link";
 import { useTranslations } from "@/i18n/provider";
 import { AlertTriangle, Check, Home, Inbox, Link2, Loader2, Settings2 } from "lucide-react";
@@ -564,6 +565,8 @@ function ViewerContent() {
 }
 
 export default function ViewerPage() {
+    if (config.standalone) redirect("/");
+
     return (
         <Suspense
             fallback={

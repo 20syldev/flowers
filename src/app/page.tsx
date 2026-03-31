@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useTranslations } from "@/i18n/provider";
 import { useTheme } from "@/hooks/theme";
 import { useLocalStorage } from "@/hooks/storage";
+import { config } from "@/data/config";
+import ViewContent from "@/app/view/[slug]/content";
 
 import {
     ArrowLeftRight,
@@ -23,7 +25,15 @@ import {
     SlidersHorizontal,
 } from "lucide-react";
 
-export default function LandingPage() {
+export default function RootPage() {
+    if (config.standalone) {
+        return <ViewContent config={config.view} />;
+    }
+
+    return <LandingPage />;
+}
+
+function LandingPage() {
     const router = useRouter();
     const t = useTranslations("landing");
     useTheme();
