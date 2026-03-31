@@ -3,11 +3,14 @@ export interface ViewEndpoint {
     url: string;
 }
 
-export interface ViewConfig {
-    slug: string;
+export interface ViewOptions {
     title: string;
     endpoints: ViewEndpoint[];
     interval?: number;
+}
+
+export interface ViewConfig extends ViewOptions {
+    slug: string;
 }
 
 export const views: ViewConfig[] = [
