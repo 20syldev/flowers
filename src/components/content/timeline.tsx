@@ -65,7 +65,7 @@ interface TimelineProps {
     pinnedEntries: DataEntry[];
     unpinnedEntries: DataEntry[];
     pinnedHashes: Set<string>;
-    onTogglePin: (entry: DataEntry) => void;
+    onTogglePin?: (entry: DataEntry) => void;
     autoScroll: boolean;
     fieldMapping: FieldMapping;
     totalCount: number;
@@ -181,7 +181,7 @@ export default function Timeline({
                     selected={!compareMode && selectedIndex === i}
                     pinned={true}
                     onSelect={compareMode ? () => onCompareSelect?.(entry) : () => onSelect?.(i)}
-                    onTogglePin={() => onTogglePin(entry)}
+                    onTogglePin={onTogglePin && (() => onTogglePin(entry))}
                     isLast={unpinnedEntries.length === 0 && i === pinnedEntries.length - 1}
                     compareSelected={compareMode && compareSelection?.has(hashEntry(entry))}
                 />
@@ -265,7 +265,7 @@ export default function Timeline({
                                             ? () => onCompareSelect?.(row.entry)
                                             : () => onSelect?.(row.globalIndex)
                                     }
-                                    onTogglePin={() => onTogglePin(row.entry)}
+                                    onTogglePin={onTogglePin && (() => onTogglePin(row.entry))}
                                     isLast={row.entryIndex === unpinnedEntries.length - 1}
                                     compareSelected={
                                         compareMode && compareSelection?.has(hashEntry(row.entry))
