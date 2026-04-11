@@ -3,7 +3,7 @@
 
 # Flowers - Real-time Data Viewer
 
-[![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.0.4-6479ee?logo=flowers.sylvain.sh&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
+[![Version](https://custom-icon-badges.demolab.com/badge/Version%20:-v1.0.5-6479ee?logo=flowers.sylvain.sh&labelColor=23272A)](https://github.com/20syldev/flowers/releases/latest)
 
 </div>
 
