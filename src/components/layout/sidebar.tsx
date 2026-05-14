@@ -453,7 +453,7 @@ function ProfileSection() {
             setProfiles(() => [profile]);
             setActiveProfileId(profile.id);
         }
-    }, [profiles.length]);
+    }, [profiles.length, setProfiles, setActiveProfileId, t]);
 
     const activeProfile = profiles.find((p) => p.id === activeProfileId);
 
