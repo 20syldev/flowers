@@ -11,9 +11,7 @@ interface FlowersConfig {
     view: ViewOptions;
 }
 
-const json: SiteConfig = process.env.FLOWERS_CONFIG
-    ? JSON.parse(process.env.FLOWERS_CONFIG)
-    : {};
+const json: SiteConfig = process.env.FLOWERS_CONFIG ? JSON.parse(process.env.FLOWERS_CONFIG) : {};
 
 export const config: FlowersConfig = {
     standalone: Object.keys(json).length > 0,
