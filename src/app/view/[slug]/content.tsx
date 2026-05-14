@@ -25,9 +25,7 @@ export default function Content({ config }: { config: ViewOptions }) {
     const [selectedHash, setSelectedHash] = useState<string | null>(null);
 
     const endpoint: ViewEndpoint = config.endpoints[activeIndex];
-    const [pollingInterval, setPollingInterval] = useState(
-        config.interval ?? defaultInterval
-    );
+    const [pollingInterval, setPollingInterval] = useState(config.interval ?? defaultInterval);
 
     const { entries, status, error, pause, resume, clear } = useDataFetcher({
         api: endpoint.url,
