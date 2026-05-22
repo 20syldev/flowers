@@ -1,0 +1,9 @@
+# Paths and patterns excluded from upstream sync
+# Glob patterns supported: *, ?, [...]
+# scripts/update.sh, .syncignore, and .lastsync are always excluded automatically
+
+# Fork-specific GitHub workflow
+.github/workflows/deploy.yml
+
+# Documentation (may diverge from upstream)
+README.md
