@@ -139,6 +139,8 @@
     "toolbar": {
         "searchPlaceholder": "Search logs...",
         "interval": "Polling interval",
+        "pollingTitle": "Polling",
+        "maxEntries": "Max entries",
         "never": "Never",
         "customPlaceholder": "Custom (ms)...",
         "pause": "Pause",

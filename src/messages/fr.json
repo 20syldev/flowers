@@ -139,6 +139,8 @@
     "toolbar": {
         "searchPlaceholder": "Rechercher dans les logs...",
         "interval": "Intervalle de requêtes",
+        "pollingTitle": "Requêtes",
+        "maxEntries": "Entrées max",
         "never": "Jamais",
         "customPlaceholder": "Personnalisé (ms)...",
         "pause": "Pause",
