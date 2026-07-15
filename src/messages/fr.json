@@ -153,6 +153,27 @@
         "downloadFiltered": "Exporter filtrés",
         "downloadAll": "Exporter tout"
     },
+    "timeline": {
+        "pinned": "{count} épinglé(s)",
+        "justNow": "À l'instant",
+        "last5min": "5 dernières minutes",
+        "lastHour": "Dernière heure",
+        "today": "Aujourd'hui"
+    },
+    "selector": {
+        "title": "Endpoints",
+        "description": "Basculer entre les endpoints configurés"
+    },
+    "diff": {
+        "title": "Comparer les entrées",
+        "selected": "{count}/2 sélectionnées",
+        "compare": "Comparer",
+        "cancel": "Annuler",
+        "added": "ajouté(s)",
+        "removed": "supprimé(s)",
+        "changed": "modifié(s)",
+        "identical": "Les entrées sont identiques"
+    },
     "shortcuts": {
         "title": "Raccourcis clavier",
         "escape": "Fermer le panneau / Quitter le mode",
@@ -178,27 +199,6 @@
         "source": "Source",
         "duration": "Durée",
         "message": "Message"
-    },
-    "selector": {
-        "title": "Endpoints",
-        "description": "Basculer entre les endpoints configurés"
-    },
-    "diff": {
-        "title": "Comparer les entrées",
-        "selected": "{count}/2 sélectionnées",
-        "compare": "Comparer",
-        "cancel": "Annuler",
-        "added": "ajouté(s)",
-        "removed": "supprimé(s)",
-        "changed": "modifié(s)",
-        "identical": "Les entrées sont identiques"
-    },
-    "timeline": {
-        "pinned": "{count} épinglé(s)",
-        "justNow": "À l'instant",
-        "last5min": "5 dernières minutes",
-        "lastHour": "Dernière heure",
-        "today": "Aujourd'hui"
     },
     "stats": {
         "total": "Total",
