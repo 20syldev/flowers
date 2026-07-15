@@ -23,11 +23,12 @@ import { cn } from "@/lib/utils";
 import { detectFields } from "@/data/fields";
 import { defaultFilters } from "@/data/presets";
 import type { Filters } from "@/data/presets";
-import { interval, statusDotColor } from "@/data/constants";
+import { maxEntries as defaultMaxEntries, interval, statusDotColor } from "@/data/constants";
 import type { Endpoint, SavedViewState, Settings } from "@/data/endpoints";
 
 const defaultSettings: Settings = {
     interval: interval,
+    maxEntries: defaultMaxEntries,
     autoScroll: true,
     notifications: false,
     sound: false,
@@ -110,6 +111,7 @@ function ViewerContent() {
     const { entries, status, error, pause, resume, clear } = useDataFetcher({
         api: api || "",
         interval: api ? settings.interval : 0,
+        maxEntries: settings.maxEntries ?? defaultMaxEntries,
     });
 
     const fieldMapping = useMemo(() => {
@@ -411,6 +413,10 @@ function ViewerContent() {
                                 interval={settings.interval}
                                 onIntervalChange={(v) =>
                                     setSettings((s) => ({ ...s, interval: v }))
+                                }
+                                maxEntries={settings.maxEntries ?? defaultMaxEntries}
+                                onMaxEntriesChange={(v) =>
+                                    setSettings((s) => ({ ...s, maxEntries: v }))
                                 }
                                 onPause={pause}
                                 onResume={resume}
