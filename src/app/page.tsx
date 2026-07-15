@@ -7,6 +7,7 @@ import { useTranslations } from "@/i18n/provider";
 import { useTheme } from "@/hooks/theme";
 import { useLocalStorage } from "@/hooks/storage";
 import { config } from "@/data/config";
+import type { Endpoint } from "@/data/endpoints";
 import ViewContent from "@/app/view/[slug]/content";
 
 import {
@@ -38,12 +39,24 @@ function LandingPage() {
     const t = useTranslations("landing");
     useTheme();
     const [apiUrl, setApiUrl] = useState("");
-    const [lastApi] = useLocalStorage<string>("lastApi", "");
+    const [endpoints, setEndpoints] = useLocalStorage<Endpoint[]>("endpoints", []);
+    const [lastApi, setLastApi] = useLocalStorage<string>("lastApi", "");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (!apiUrl.trim()) return;
-        router.push(`/monitor?api=${encodeURIComponent(apiUrl.trim())}`);
+        const url = apiUrl.trim();
+        if (!url) return;
+        if (!endpoints.some((ep) => ep.url === url)) {
+            let name: string;
+            try {
+                name = new URL(url).hostname;
+            } catch {
+                name = url;
+            }
+            setEndpoints((prev) => [...prev, { url, name }]);
+        }
+        setLastApi(url);
+        router.push(`/monitor?api=${encodeURIComponent(url)}`);
     };
 
     const features = [
