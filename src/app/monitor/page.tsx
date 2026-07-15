@@ -5,13 +5,14 @@ import { redirect, useRouter, useSearchParams } from "next/navigation";
 import { config } from "@/data/config";
 import Link from "next/link";
 import { useTranslations } from "@/i18n/provider";
-import { AlertTriangle, Check, Home, Inbox, Link2, Loader2, Settings2 } from "lucide-react";
+import { AlertTriangle, Check, Home, Inbox, Link2, Loader2, Settings2, Tags } from "lucide-react";
 import { DesktopSidebar, MobileSidebar } from "@/components/layout/sidebar";
 import Toolbar from "@/components/layout/toolbar";
 import Timeline from "@/components/content/timeline";
 import DetailPanel from "@/components/content/detail";
 import DiffDialog from "@/components/modules/diff";
 import EditorDialog from "@/components/dialogs/editor";
+import FieldsDialog from "@/components/dialogs/fields";
 import Notifications from "@/components/modules/notifications";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -21,6 +22,7 @@ import { useLocalStorage } from "@/hooks/storage";
 import { hashEntry } from "@/lib/hash";
 import { cn } from "@/lib/utils";
 import { detectFields } from "@/data/fields";
+import type { FieldMapping } from "@/data/fields";
 import { defaultFilters } from "@/data/presets";
 import type { Filters } from "@/data/presets";
 import { maxEntries as defaultMaxEntries, interval, statusDotColor } from "@/data/constants";
@@ -69,6 +71,27 @@ function ViewerContent() {
         },
         [api, setAllPins]
     );
+    const [allMappings, setAllMappings] = useLocalStorage<Record<string, FieldMapping>>(
+        "mappings",
+        {}
+    );
+    const mappingOverrides = useMemo<FieldMapping>(
+        () => (api ? (allMappings[api] ?? {}) : {}),
+        [allMappings, api]
+    );
+    const setMappingOverrides = useCallback(
+        (next: FieldMapping) => {
+            if (!api) return;
+            setAllMappings((prev) => {
+                if (Object.keys(next).length === 0) {
+                    return Object.fromEntries(Object.entries(prev).filter(([key]) => key !== api));
+                }
+                return { ...prev, [api]: next };
+            });
+        },
+        [api, setAllMappings]
+    );
+    const [fieldsDialogOpen, setFieldsDialogOpen] = useState(false);
     const [compareMode, setCompareMode] = useState(false);
     const [compareSelection, setCompareSelection] = useState<Record<string, unknown>[]>([]);
     const [diffOpen, setDiffOpen] = useState(false);
@@ -116,12 +139,17 @@ function ViewerContent() {
         headers: currentEndpoint?.headers,
     });
 
-    const fieldMapping = useMemo(() => {
-        if (entries.length > 0) {
-            return detectFields(entries[0]);
-        }
+    const detectedMapping = useMemo<FieldMapping>(() => {
+        if (entries.length > 0) return detectFields(entries[0]);
         return {};
     }, [entries]);
+
+    const sampleKeys = useMemo(() => (entries[0] ? Object.keys(entries[0]) : []), [entries]);
+
+    const fieldMapping = useMemo<FieldMapping>(() => {
+        const merged = { ...detectedMapping, ...mappingOverrides };
+        return Object.fromEntries(Object.entries(merged).filter(([, v]) => v)) as FieldMapping;
+    }, [detectedMapping, mappingOverrides]);
 
     const filteredEntries = useMemo(() => {
         let result = entries;
@@ -358,6 +386,16 @@ function ViewerContent() {
                         )}
                     </div>
                     <div className="flex items-center shrink-0">
+                        {api && entries.length > 0 && (
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-8 w-8 p-0"
+                                onClick={() => setFieldsDialogOpen(true)}
+                            >
+                                <Tags className="size-4" />
+                            </Button>
+                        )}
                         <Button
                             variant="ghost"
                             size="sm"
@@ -392,6 +430,17 @@ function ViewerContent() {
                         currentState={currentState}
                         onSave={handleEditEndpoint}
                         onDelete={handleDeleteEndpoint}
+                    />
+                )}
+
+                {api && entries.length > 0 && (
+                    <FieldsDialog
+                        open={fieldsDialogOpen}
+                        onOpenChange={setFieldsDialogOpen}
+                        sampleKeys={sampleKeys}
+                        detected={detectedMapping}
+                        overrides={mappingOverrides}
+                        onOverridesChange={setMappingOverrides}
                     />
                 )}
 
