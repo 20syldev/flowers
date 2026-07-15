@@ -82,6 +82,7 @@ function readStorage<T>(key: string, fallback: T): T {
 
 const defaultSettings: Settings = {
     interval: 2000,
+    maxEntries: 1000,
     autoScroll: true,
     notifications: false,
     sound: false,
@@ -157,7 +158,7 @@ export async function decodePreview(key: string): Promise<TransferPayload> {
 export async function importSettings(key: string): Promise<TransferPayload> {
     const payload = await decodePreview(key);
 
-    localStorage.setItem(PREFIX + "settings", JSON.stringify(payload.s));
+    localStorage.setItem(PREFIX + "settings", JSON.stringify({ ...defaultSettings, ...payload.s }));
     localStorage.setItem(PREFIX + "filters", JSON.stringify(payload.f));
     localStorage.setItem(PREFIX + "endpoints", JSON.stringify(payload.fav));
     localStorage.setItem(PREFIX + "presets", JSON.stringify(payload.p));
