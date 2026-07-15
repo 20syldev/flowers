@@ -2,6 +2,7 @@ import type { Filters } from "@/data/presets";
 
 export interface Settings {
     interval: number;
+    maxEntries?: number;
     autoScroll: boolean;
     notifications: boolean;
     sound: boolean;
