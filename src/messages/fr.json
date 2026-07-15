@@ -165,6 +165,20 @@
     "detail": {
         "fallbackTitle": "Détails"
     },
+    "fields": {
+        "title": "Correspondance des champs",
+        "description": "Surcharger la détection automatique pour cet endpoint.",
+        "auto": "Auto",
+        "none": "Aucun",
+        "timestamp": "Horodatage",
+        "status": "Statut",
+        "method": "Méthode",
+        "url": "URL",
+        "category": "Catégorie",
+        "source": "Source",
+        "duration": "Durée",
+        "message": "Message"
+    },
     "selector": {
         "title": "Endpoints",
         "description": "Basculer entre les endpoints configurés"

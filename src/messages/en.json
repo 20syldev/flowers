@@ -186,6 +186,20 @@
     "detail": {
         "fallbackTitle": "Details"
     },
+    "fields": {
+        "title": "Field mapping",
+        "description": "Override auto-detection for this endpoint.",
+        "auto": "Auto",
+        "none": "None",
+        "timestamp": "Timestamp",
+        "status": "Status",
+        "method": "Method",
+        "url": "URL",
+        "category": "Category",
+        "source": "Source",
+        "duration": "Duration",
+        "message": "Message"
+    },
     "stats": {
         "total": "Total",
         "errorRate": "Error rate",
