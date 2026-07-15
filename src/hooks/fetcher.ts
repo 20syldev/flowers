@@ -39,6 +39,14 @@ function extractEntries(raw: unknown): DataEntry[] {
     return best ?? [obj as DataEntry];
 }
 
+function buildHeaders(headers?: { key: string; value: string }[]): HeadersInit | undefined {
+    if (!headers?.length) return undefined;
+    const entries = headers
+        .filter((h) => h.key.trim())
+        .map((h) => [h.key.trim(), h.value] as [string, string]);
+    return entries.length ? Object.fromEntries(entries) : undefined;
+}
+
 interface Scheduler {
     pause(): void;
     resume(): void;
@@ -50,6 +58,7 @@ interface UseDataFetcherOptions {
     api: string;
     interval?: number;
     maxEntries?: number;
+    headers?: { key: string; value: string }[];
 }
 
 /**
@@ -62,9 +71,15 @@ interface UseDataFetcherOptions {
  * @param options.api - The API endpoint URL to poll
  * @param options.interval - Polling interval in ms (default: 2000; 0 = single shot)
  * @param options.maxEntries - Ring-buffer cap; 0 or undefined means unlimited
+ * @param options.headers - Request headers sent with every poll
  * @returns Object with entries, status, error, and controls (pause, resume, clear)
  */
-export function useDataFetcher({ api, interval = 2000, maxEntries }: UseDataFetcherOptions) {
+export function useDataFetcher({
+    api,
+    interval = 2000,
+    maxEntries,
+    headers,
+}: UseDataFetcherOptions) {
     const [entries, setEntries] = useState<DataEntry[]>([]);
     const [status, setStatus] = useState<FetchStatus>("connecting");
     const [error, setError] = useState<string | null>(null);
@@ -77,6 +92,7 @@ export function useDataFetcher({ api, interval = 2000, maxEntries }: UseDataFetc
     const apiRef = useRef(api);
     const intervalRef = useRef(interval);
     const maxEntriesRef = useRef(maxEntries);
+    const headersRef = useRef(buildHeaders(headers));
 
     useEffect(() => {
         const previous = intervalRef.current;
@@ -93,9 +109,13 @@ export function useDataFetcher({ api, interval = 2000, maxEntries }: UseDataFetc
         }
     }, [maxEntries]);
 
+    useEffect(() => {
+        headersRef.current = buildHeaders(headers);
+    }, [headers]);
+
     const fetchOnce = useCallback(async (url: string, signal: AbortSignal): Promise<boolean> => {
         try {
-            const response = await fetch(url, { signal });
+            const response = await fetch(url, { signal, headers: headersRef.current });
             const raw = await response.json();
             if (signal.aborted || url !== apiRef.current || pausedRef.current) return true;
 
