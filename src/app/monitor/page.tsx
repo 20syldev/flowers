@@ -86,7 +86,6 @@ function ViewerContent() {
         if (api) setLastApi(api);
     }, [api, setLastApi]);
 
-    // Auto-sync savedState for the current endpoint when remember is enabled
     useEffect(() => {
         if (!api) return;
         setEndpoints((prev) => {
@@ -108,10 +107,13 @@ function ViewerContent() {
         });
     }, [api, filters, settings, sidebarWidth, detailWidth, setEndpoints]);
 
+    const currentEndpoint = endpoints.find((f) => f.url === api);
+
     const { entries, status, error, pause, resume, clear } = useDataFetcher({
         api: api || "",
         interval: api ? settings.interval : 0,
         maxEntries: settings.maxEntries ?? defaultMaxEntries,
+        headers: currentEndpoint?.headers,
     });
 
     const fieldMapping = useMemo(() => {
@@ -299,8 +301,6 @@ function ViewerContent() {
         }
     })();
 
-    const currentEndpoint = endpoints.find((f) => f.url === api);
-
     const currentState: SavedViewState = {
         filters,
         settings,
@@ -385,6 +385,7 @@ function ViewerContent() {
 
                 {currentEndpoint && (
                     <EditorDialog
+                        key={currentEndpoint.url}
                         open={editDialogOpen}
                         onOpenChange={setEditDialogOpen}
                         endpoint={currentEndpoint}
