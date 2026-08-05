@@ -18,10 +18,13 @@ Connect any JSON endpoint and watch your data stream in. Auto-detection, advance
 ## Features
 
 - **Real-time** — Automatic polling with configurable interval. Your data updates continuously.
+- **Authenticated APIs** — Add custom headers per endpoint to reach an API behind a token or an API key.
 - **Auto-detection** — Automatic recognition of field types: status, method, URL, timestamp, duration...
+- **Field mapping** — When a field is not recognized, assign each type to the key of your choice.
 - **Advanced filters** — Filter by status codes, HTTP methods, or free text. Combine filters as you wish.
 - **Presets** — Save your favorite configurations and switch between them in one click.
 - **Comparison** — Select two entries and visualize differences side by side.
+- **Long sessions** — Cap how many entries stay in memory, and let failing endpoints be retried with an increasing delay instead of every interval.
 - **Import / Export** — Export your data and settings, or import them on another browser.
 
 ## Usage
@@ -64,13 +67,14 @@ Recognized field types by keyword:
 
 Flowers stores all your data locally in your browser. Nothing is sent to any server.
 
-- **Endpoints** — Your saved API endpoints with their name, URL, and optional remembered state.
+- **Endpoints** — Your saved API endpoints with their name, URL, headers, and optional remembered state.
 - **Presets** — Custom filter and layout presets you create to quickly switch views.
 - **Filters** — Your active status codes, HTTP methods, and search query.
-- **Settings** — Polling interval, auto-scroll, notifications, and sound alerts preferences.
+- **Settings** — Polling interval, entry cap, auto-scroll, notifications, and sound alerts preferences.
 - **Pinned entries** — Entries you pinned per endpoint, so they stay visible at the top.
+- **Field mapping** — Per-endpoint overrides for the fields the auto-detection did not get right.
 
-You can export and import all of this data via the transfer feature.
+You can export and import all of this data via the transfer feature, with one exception: endpoint headers may hold secrets, so they stay on this browser and are never included in a transfer key.
 
 ## Configuration
 
