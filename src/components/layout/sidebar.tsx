@@ -81,6 +81,9 @@ function SidebarContent({
 
     const allPresets = [...builtinPresets, ...customPresets];
 
+    const trimmedAddUrl = addUrl.trim();
+    const addUrlExists = endpoints.some((f) => f.url === trimmedAddUrl);
+
     const currentState: SavedViewState = {
         filters,
         settings,
@@ -89,18 +92,17 @@ function SidebarContent({
     };
 
     const handleAddEndpoint = () => {
-        const url = addUrl.trim();
-        if (!url) return;
-        const alreadyExists = endpoints.some((f) => f.url === url);
-        if (!alreadyExists) {
-            let name: string;
-            try {
-                name = new URL(url).hostname;
-            } catch {
-                name = url;
-            }
-            onEndpointsChange((prev) => [...prev, { url, name, savedState: { ...currentState } }]);
+        const url = trimmedAddUrl;
+        if (!url || addUrlExists) return;
+
+        let name: string;
+        try {
+            name = new URL(url).hostname;
+        } catch {
+            name = url;
         }
+        onEndpointsChange((prev) => [...prev, { url, name, savedState: { ...currentState } }]);
+
         setLastApi(url);
         router.push(`/monitor?api=${encodeURIComponent(url)}`);
         setAddUrl("");
@@ -213,10 +215,20 @@ function SidebarContent({
                                             value={addUrl}
                                             onChange={(e) => setAddUrl(e.target.value)}
                                             className="pl-9"
+                                            aria-invalid={addUrlExists}
                                             autoFocus
                                         />
                                     </div>
-                                    <Button type="submit" size="sm" disabled={!addUrl.trim()}>
+                                    {addUrlExists && (
+                                        <p className="text-xs text-destructive">
+                                            {t("endpointExists")}
+                                        </p>
+                                    )}
+                                    <Button
+                                        type="submit"
+                                        size="sm"
+                                        disabled={!trimmedAddUrl || addUrlExists}
+                                    >
                                         {tc("add")}
                                     </Button>
                                 </form>
