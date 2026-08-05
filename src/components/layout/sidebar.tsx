@@ -23,6 +23,7 @@ import TransferDialog from "../modules/transfer";
 import ProfilesDialog from "../modules/profiles";
 import EditorDialog from "../dialogs/editor";
 import PresetDialog from "../dialogs/preset";
+import { useEndpointKeys } from "@/hooks/endpoints";
 import { useLocalStorage } from "@/hooks/storage";
 import { builtinPresets, type Filters, type Preset, presetMatch } from "@/data/presets";
 import type { Profile } from "@/data/profiles";
@@ -65,6 +66,7 @@ function SidebarContent({
     const [sidebarWidth] = useLocalStorage<number>("sidebarWidth", 288);
     const [detailWidth] = useLocalStorage<number>("detailWidth", 384);
     const [, setLastApi] = useLocalStorage<string>("lastApi", "");
+    const { moveKeys, dropKeys } = useEndpointKeys();
 
     const [newPresetName, setNewPresetName] = useState("");
     const [presetDialogOpen, setPresetDialogOpen] = useState(false);
@@ -111,13 +113,27 @@ function SidebarContent({
 
     const handleEditEndpoint = (updated: Endpoint) => {
         if (!editingEndpoint) return;
-        onEndpointsChange((prev) => prev.map((f) => (f.url === editingEndpoint.url ? updated : f)));
+
+        const previous = editingEndpoint.url;
+        onEndpointsChange((prev) => prev.map((f) => (f.url === previous ? updated : f)));
         setEditingEndpoint(updated);
+
+        if (updated.url === previous) return;
+
+        moveKeys(previous, updated.url);
+
+        if (currentApi === previous) {
+            setLastApi(updated.url);
+            router.replace(`/monitor?api=${encodeURIComponent(updated.url)}`);
+        }
     };
 
     const handleDeleteEndpoint = () => {
         if (!editingEndpoint) return;
-        onEndpointsChange((prev) => prev.filter((f) => f.url !== editingEndpoint.url));
+
+        const { url } = editingEndpoint;
+        onEndpointsChange((prev) => prev.filter((f) => f.url !== url));
+        dropKeys(url);
         setEditingEndpoint(null);
     };
 
@@ -132,6 +148,7 @@ function SidebarContent({
 
     const renameEndpoint = (url: string, newName: string) => {
         if (!newName.trim()) return;
+
         onEndpointsChange((prev) =>
             prev.map((f) => (f.url === url ? { ...f, name: newName.trim() } : f))
         );
@@ -140,6 +157,7 @@ function SidebarContent({
 
     const savePreset = () => {
         if (!newPresetName.trim()) return;
+
         const preset: Preset = {
             id: `custom-${Date.now()}`,
             name: newPresetName.trim(),
@@ -297,6 +315,7 @@ function SidebarContent({
                         if (!v) setEditingEndpoint(null);
                     }}
                     endpoint={editingEndpoint}
+                    existingUrls={endpoints.map((f) => f.url)}
                     currentState={currentState}
                     onSave={handleEditEndpoint}
                     onDelete={handleDeleteEndpoint}
