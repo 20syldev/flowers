@@ -17,6 +17,7 @@ import Notifications from "@/components/modules/notifications";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useDataFetcher } from "@/hooks/fetcher";
+import { useEndpointKeys } from "@/hooks/endpoints";
 import { useKeyboardShortcuts } from "@/hooks/keyboard";
 import { useLocalStorage } from "@/hooks/storage";
 import { hashEntry } from "@/lib/hash";
@@ -91,6 +92,7 @@ function ViewerContent() {
         },
         [api, setAllMappings]
     );
+    const { moveKeys, dropKeys } = useEndpointKeys();
     const [fieldsDialogOpen, setFieldsDialogOpen] = useState(false);
     const [compareMode, setCompareMode] = useState(false);
     const [compareSelection, setCompareSelection] = useState<Record<string, unknown>[]>([]);
@@ -337,11 +339,21 @@ function ViewerContent() {
     };
 
     const handleEditEndpoint = (updated: Endpoint) => {
-        setEndpoints((prev) => prev.map((f) => (f.url === currentEndpoint!.url ? updated : f)));
+        const previous = currentEndpoint!.url;
+        setEndpoints((prev) => prev.map((f) => (f.url === previous ? updated : f)));
+
+        if (updated.url === previous) return;
+
+        moveKeys(previous, updated.url);
+        setLastApi(updated.url);
+
+        router.replace(`/monitor?api=${encodeURIComponent(updated.url)}`);
     };
 
     const handleDeleteEndpoint = () => {
-        setEndpoints((prev) => prev.filter((f) => f.url !== currentEndpoint!.url));
+        const { url } = currentEndpoint!;
+        setEndpoints((prev) => prev.filter((f) => f.url !== url));
+        dropKeys(url);
         router.push("/monitor");
     };
 
@@ -427,6 +439,7 @@ function ViewerContent() {
                         open={editDialogOpen}
                         onOpenChange={setEditDialogOpen}
                         endpoint={currentEndpoint}
+                        existingUrls={endpoints.map((f) => f.url)}
                         currentState={currentState}
                         onSave={handleEditEndpoint}
                         onDelete={handleDeleteEndpoint}
